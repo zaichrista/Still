@@ -49,7 +49,8 @@ button{cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manip
 .screen.haven{background:var(--haven);color:var(--on-haven)}
 .screen.green{background:var(--green);color:var(--on-green)}
 .screen.rose{background:var(--clay-tint);color:var(--clay-on-tint)}
-.haven .lg,.green .lg,.rose .lg,.haven .cap{color:inherit;opacity:.9}
+.haven .lg,.green .lg,.rose .lg,.haven .cap,.green .cap{color:inherit;opacity:.9}
+.group,.card,.entry,.plan,.dots,textarea{flex-shrink:0}
 .haven .btn,.green .btn{background:var(--on-haven);color:var(--haven)}
 .green .btn{background:var(--on-green);color:var(--green)}
 .haven .btn.ghost,.green .btn.ghost{background:transparent;color:inherit;border-color:currentColor}
@@ -94,8 +95,8 @@ textarea::placeholder{color:var(--faint)}
 .dot.today{background:var(--raised);box-shadow:inset 0 0 0 3px var(--blue)}
 .dot.today.held{background:var(--green);box-shadow:0 0 0 3px var(--base),0 0 0 5px var(--blue)}
 .dot.slip{background:var(--clay)}
-.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));justify-items:center;row-gap:4px}
-.cell{width:40px;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--faint)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));justify-items:center;row-gap:2px}
+.cell{width:38px;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--faint)}
 .cell.held{background:var(--green);color:var(--on-green);font-weight:600}
 .cell.slip{background:var(--clay);color:var(--on-clay);font-weight:600}
 .cell.today{box-shadow:0 0 0 3px var(--raised),0 0 0 5px var(--blue);font-weight:700}
@@ -136,7 +137,44 @@ textarea::placeholder{color:var(--faint)}
 .alts{display:none}
 .altq{min-height:56px;border:0;border-radius:16px;background:var(--raised);font-size:16px;font-weight:500;line-height:22px;padding:14px 18px;text-align:left}
 .phead{max-width:290px}
-.bwrap{position:relative;width:260px;height:260px;display:flex;align-items:center;justify-content:center}
+.bwrap{position:relative;width:min(260px,30dvh);height:min(260px,30dvh);display:flex;align-items:center;justify-content:center}
+.bwrap{container-type:inline-size}
+#blabel{font-size:20px;font-size:7.4cqw;line-height:1.25;font-weight:600;white-space:nowrap}
+#bcount{font-size:14px;font-size:max(13px,5.4cqw);font-weight:500;opacity:.8}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips.mid{justify-content:center}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font-size:15px;font-weight:600;opacity:.92}
+.chip[aria-pressed="true"]{background:var(--on-green);color:var(--green);border-color:transparent;opacity:1}
+.card.blue .chip[aria-pressed="true"]{background:var(--blue);color:var(--on-blue)}
+.plan{margin-top:16px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.13);display:flex;flex-direction:column;gap:6px;min-width:0}
+.plan .r{font-size:16px;line-height:22px;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.plan .cap{overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.obw{width:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;flex:1;min-height:0}
+.obdots{display:flex;gap:8px;margin-bottom:28px}
+.obdots span{width:8px;height:8px;border-radius:999px;background:var(--border-strong);opacity:.4}
+.obdots span.on{background:var(--green);opacity:1;width:24px}
+.obrow{display:flex;align-items:flex-start;gap:14px;font-size:18px;line-height:26px;color:var(--text)}
+.obrow i{flex:none;width:10px;height:10px;border-radius:999px;background:var(--green);margin-top:8px}
+.opt.pick{background:var(--raised);color:var(--text)}
+select{-webkit-appearance:none;appearance:none;width:100%;height:52px;border:0;border-radius:16px;background:var(--raised);font-size:17px;padding:0 16px;color:var(--text)}
+@media (max-height:700px){
+  .screen{padding-top:calc(env(safe-area-inset-top) + 40px);padding-bottom:104px}
+  .screen.full{padding-bottom:calc(env(safe-area-inset-bottom) + 20px)}
+  h1.display{font-size:48px;line-height:50px}
+  h1.statement{font-size:34px;line-height:40px}
+  .dots{margin-top:24px!important}
+  .tr{padding-top:16px}
+  .btn.big{min-height:60px}
+  .obdots{margin-bottom:16px}
+  .plan{margin-top:10px;padding:10px 14px}
+  h1.display{font-size:44px;line-height:46px}
+  .cw{margin-top:16px!important}
+  .tgrid .card{padding:14px 16px}
+  .dots{gap:8px 8px}
+  .link{min-height:40px}
+  .tr{padding-top:8px}
+}
+@media (max-width:340px){.seg button{padding:0 10px}}
 @media (min-width:900px){
   :root{--gutter:72px}
   .screen{padding-bottom:136px}
@@ -180,8 +218,6 @@ textarea::placeholder{color:var(--faint)}
   /* pause */
   .phead{max-width:760px}
   .bwrap{width:min(320px,34vh);height:min(320px,34vh)}
-  #blabel{font-size:38px!important;line-height:46px!important}
-  #bcount{font-size:24px!important}
   .pfoot{align-self:center;width:380px}
 }
 @media (min-width:900px) and (hover:hover){.altq:hover{filter:brightness(.96)}}
@@ -209,7 +245,7 @@ var daysOf = function (n) { return n === 1 ? '1 day' : n + ' days'; };
 var fmtDay = function (s) { return parse(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }); };
 
 /* ---------- state ---------- */
-function fresh() { return { start: today(), slips: [], checkins: {}, urges: [], notes: [], settings: { theme: 'day', pin: null, sound: true } }; }
+function fresh() { return { start: today(), slips: [], checkins: {}, urges: [], notes: [], events: [], onboarded: false, reason: '', instead: '', settings: { theme: 'day', pin: null, sound: true, risk: 'none' } }; }
 function load() {
   try { var raw = localStorage.getItem(KEY); if (raw) { var s = JSON.parse(raw); var f = fresh(); s.settings = Object.assign(f.settings, s.settings || {}); return Object.assign(f, s); } } catch (e) {}
   return fresh();
@@ -227,10 +263,31 @@ function runsHist() {
 }
 function longest() { return Math.max.apply(null, runsHist().concat([dayNum()])); }
 function dateStatus(d) { if (d < S.start) return 'none'; return S.slips.indexOf(d) > -1 ? 'slip' : 'held'; }
+var TRIGS = ['Bored', 'Stressed', 'Lonely', 'Tired', 'Late night', 'Scrolling', 'Anxious'];
+var RISKS = [['late', 'Late night', 22, 5], ['evening', 'Evening', 18, 23], ['morning', 'Morning', 5, 10], ['day', 'Daytime', 10, 18], ['none', 'It varies', 0, 0]];
+var BUCKETS = [['late at night', 22, 5], ['in the evening', 18, 22], ['in the morning', 5, 11], ['during the day', 11, 18]];
+function inWin(h, a, b) { return a < b ? (h >= a && h < b) : (h >= a || h < b); }
+function nudge() {
+  var r = RISKS.filter(function (x) { return x[0] === S.settings.risk; })[0];
+  if (!r || r[0] === 'none') return null;
+  return inWin(new Date().getHours(), r[2], r[3]) ? 'This is your hardest time. Put the phone down, or tap the red button.' : null;
+}
+function insight() {
+  var ev = S.events; if (ev.length < 3) return null;
+  var bc = BUCKETS.map(function () { return 0; }), tc = {}, best = -1, top = null, tb = 0;
+  ev.forEach(function (e) {
+    BUCKETS.forEach(function (b, i) { if (inWin(e.h, b[1], b[2])) bc[i]++; });
+    (e.trig || []).forEach(function (t) { tc[t] = (tc[t] || 0) + 1; });
+  });
+  bc.forEach(function (c, i) { if (c > tb) { tb = c; best = i; } });
+  Object.keys(tc).forEach(function (t) { if (!top || tc[t] > tc[top]) top = t; });
+  return 'Hardest time: ' + BUCKETS[best][0] + '.' + (top ? ' Top trigger: ' + top.toLowerCase() + '.' : '');
+}
+function lastEvent(k) { for (var i = S.events.length - 1; i >= 0; i--) if (S.events[i].k === k) return S.events[i]; return null; }
 var POOL = ['Quiet days add up.', 'You are doing it. Keep going.', 'Every day you stay is one you can lean on.', "You've got this. One evening at a time.", 'Still here. Still going.'];
 function motive() {
   var n = dayNum(), runs = runsHist(), pl = runs.length ? runs[runs.length - 1] : 0;
-  if (n === 1) return S.slips.length ? 'Back at it. The days before still count.' : 'One day. That is all it asks of you today.';
+  if (n === 1) return S.slips.length ? 'Back at it. The days before still count.' : 'One day without porn. That is all today asks.';
   var ms = { 7: "A full week. You've got this.", 14: 'Two weeks. Look at you go.', 30: 'A month. That is real.', 60: 'Sixty days. Keep going.', 100: 'A hundred days. Still here.' };
   if (ms[n]) return ms[n];
   if (pl > 0 && n === longest()) return "Your longest run yet. You've got this.";
@@ -309,7 +366,7 @@ var view = 'splash';
 var T = {};
 var timers = [];
 function clearTimers() { timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; }
-function go(v) { clearTimers(); view = v; T.sheet = null; render(); var s = $('#screen'); if (s) s.scrollTop = 0; }
+function go(v) { clearTimers(); if (v !== 'pause') T.urgeEnd = null; view = v; T.sheet = null; render(); var s = $('#screen'); if (s) s.scrollTop = 0; }
 function toast(msg) { T.toast = msg; render(); timers.push(setTimeout(function () { T.toast = null; render(); }, 2600)); }
 function applyTheme() {
   var t = S.settings.theme;
@@ -319,27 +376,53 @@ function applyTheme() {
 }
 function recordSlip() {
   var t0 = today(), prevLen = diff(runStart(), t0);
-  if (S.slips.indexOf(t0) === -1) { S.slips.push(t0); S.slips.sort(); } else prevLen = T.prevLen || 0;
+  if (S.slips.indexOf(t0) === -1) { S.slips.push(t0); S.slips.sort(); S.events.push({ k: 'slip', d: t0, h: new Date().getHours(), trig: [] }); } else prevLen = T.prevLen || 0;
   T.prevLen = prevLen; save();
 }
 function tabsHtml() {
-  var on = { today: 'today', days: 'days', notes: 'notes', settings: 'settings' }[view];
+  var on = { today: 'today', days: 'days', notes: 'notes', settings: 'settings', plan: 'settings' }[view];
   function tab(id, icon, label) { return '<button class="tab' + (on === id ? ' on' : '') + '" data-act="go" data-v="' + id + '"' + (on === id ? ' aria-current="page"' : '') + '>' + ic(icon) + '<span>' + label + '</span></button>'; }
   return '<nav class="tabs" aria-label="Main">' + tab('today', 'sprout', 'Today') + tab('days', 'calendar', 'Days') +
-    '<button class="pausedisc" data-act="go" data-v="pause" aria-label="I need a minute">' + ic('wind', 26) + '</button>' +
+    '<button class="pausedisc" data-act="go" data-v="pause" aria-label="I have an urge">' + ic('wind', 26) + '</button>' +
     tab('notes', 'pencil', 'Write') + tab('settings', 'settings', 'Settings') + '</nav>';
 }
 
 /* ---------- views ---------- */
-var FULL = { splash: 1, lock: 1, pin: 1, pause: 1, passed: 1, slip: 1, checkin: 1 };
+var FULL = { splash: 1, onboard: 1, lock: 1, pin: 1, pause: 1, passed: 1, slip: 1, checkin: 1 };
 var V = {};
 
 V.splash = function () {
   if (!T.splashStarted) { T.splashStarted = true; timers.push(setTimeout(function () { if (view === 'splash') afterSplash(); }, 4800)); }
   return '<div class="col center grow" style="justify-content:center;gap:32px" data-act="skip" role="button" tabindex="0" aria-label="Skip intro">' + logo(true, 300) +
-    '<span class="fade" style="animation-delay:3.1s;font-size:16px;line-height:24px;font-weight:500;color:var(--muted)">A quiet place to stop for a minute.</span></div>';
+    '<span class="fade" style="animation-delay:3.1s;font-size:16px;line-height:24px;font-weight:500;color:var(--muted)">Quit porn. One day at a time.</span></div>';
 };
-function afterSplash() { try { sessionStorage.setItem('still.splash', '1'); } catch (e) {} if (S.settings.pin && !isUnlocked()) { T.pinMode = 'lock'; T.pin = ''; go('lock'); } else go('today'); }
+function afterSplash() { try { sessionStorage.setItem('still.splash', '1'); } catch (e) {} if (S.settings.pin && !isUnlocked()) { T.pinMode = 'lock'; T.pin = ''; go('lock'); } else go(S.onboarded ? 'today' : 'onboard'); }
+
+V.onboard = function () {
+  var step = T.ob || 0, body, foot;
+  if (T.why === undefined) T.why = S.reason || '';
+  if (T.risk === undefined) T.risk = S.settings.risk || 'none';
+  var dots = '<div class="obdots" aria-hidden="true">' + [0, 1, 2, 3].map(function (i) { return '<span class="' + (i === step ? 'on' : '') + '"></span>'; }).join('') + '</div>';
+  if (step === 0) {
+    body = '<h1 class="statement">Still helps you quit porn.</h1>' +
+      '<div class="col g16" style="margin-top:28px"><div class="obrow"><i></i><span>Count your days without it.</span></div><div class="obrow"><i></i><span>Ride out urges before they win.</span></div><div class="obrow"><i></i><span>See what sets them off.</span></div></div>' +
+      '<p class="cap" style="margin-top:28px;line-height:20px">Everything stays on this phone. The name and icon on your home screen just say Still.</p>';
+    foot = '<button class="btn" data-act="obnext">Continue</button>';
+  } else if (step === 1) {
+    body = '<h1 class="statement">Why are you quitting?</h1><p class="lg" style="margin-top:12px;font-size:16px;line-height:24px">You will see this when an urge hits.</p>' +
+      '<div style="margin-top:20px"><label for="why" style="position:absolute;left:-9999px">Your reason</label><textarea id="why" data-bind="why" style="min-height:140px" placeholder="In your own words.">' + esc(T.why) + '</textarea></div>';
+    foot = '<button class="btn" data-act="obnext">Continue</button><button class="link" data-act="obback">Back</button>';
+  } else if (step === 2) {
+    body = '<h1 class="statement">When is it hardest?</h1><p class="lg" style="margin-top:12px;font-size:16px;line-height:24px">Still will nudge you during that time when you open it.</p>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px">' +
+      RISKS.map(function (r) { return '<button class="opt pick" data-act="obrisk" data-v="' + r[0] + '" aria-pressed="' + (T.risk === r[0]) + '">' + r[1] + '</button>'; }).join('') + '</div>';
+    foot = '<button class="btn" data-act="obnext">Continue</button><button class="link" data-act="obback">Back</button>';
+  } else {
+    body = '<h1 class="statement">I am done with porn. Starting today.</h1><p class="lg" style="margin-top:16px">Day one begins when you tap.</p>';
+    foot = '<button class="btn" data-act="obdone">I am in</button><button class="link" data-act="obback">Back</button>';
+  }
+  return '<div class="obw">' + dots + body + '<div class="grow" style="min-height:24px"></div><div class="col g12">' + foot + '</div></div>';
+};
 function isUnlocked() { try { return sessionStorage.getItem('still.unlocked') === '1'; } catch (e) { return false; } }
 
 function pinHtml(title, msg) {
@@ -372,11 +455,11 @@ V.today = function () {
     ? '<div class="card blue col g4"><span class="label" style="font-size:16px">Today is closed</span><span style="font-size:15px;line-height:20px;opacity:.9">Rest well. Tomorrow starts clean.</span></div>'
     : '<div class="card blue row"><div class="col g4 grow"><span class="label" style="font-size:16px">Close the day</span><span style="font-size:15px;line-height:20px;opacity:.9">Two minutes, when the evening settles.</span></div><button class="btn small" style="background:var(--blue);color:var(--on-blue)" data-act="go" data-v="checkin">Check in</button></div>';
   return '<div class="tgrid"><div class="tl"><div class="col g8"><span class="label" style="color:var(--blue-text)">' + now.toLocaleDateString('en-GB', { weekday: 'long' }) + ' ' + part + '</span>' +
-    '<h1 class="display">Day ' + word(n) + '.</h1><p class="lg" style="max-width:310px">' + motive() + '</p></div>' +
+    '<h1 class="display">Day ' + word(n) + '.</h1><span class="label" style="color:var(--green-text);font-size:18px;line-height:24px">without porn</span><p class="lg" style="max-width:310px;margin-top:4px">' + (nudge() || motive()) + '</p></div>' +
     '<div class="dots" style="margin-top:36px">' + dots + '</div>' +
-    '<div class="tsp"></div><div style="margin-top:32px">' + card + '</div></div>' +
-    '<div class="tr"><button class="btn big" data-act="go" data-v="pause">' + ic('wind') + 'I need a minute</button>' +
-    '<button class="link" data-act="slipask" style="margin-top:8px">Something happened</button></div></div>';
+    '<div class="tsp"></div><div class="cw" style="margin-top:32px">' + card + '</div></div>' +
+    '<div class="tr"><button class="btn big" data-act="go" data-v="pause">' + ic('wind') + 'I have an urge</button>' +
+    '<button class="link" data-act="slipask" style="margin-top:8px">I watched porn</button></div></div>';
 };
 
 var PHASES = [
@@ -384,15 +467,29 @@ var PHASES = [
   { n: 'hold', label: 'Hold', hint: 'Let it settle', ms: 2000, scale: 1 },
   { n: 'out', label: 'Breathe out', hint: 'Long and slow, through your mouth', ms: 6000, scale: 0.55 }
 ];
+function urgeText() {
+  var left = Math.max(0, Math.round(((T.urgeEnd || 0) - Date.now()) / 1000));
+  if (!left) return 'Ten minutes. You stayed with it.';
+  return 'Most urges fade within ten minutes. ' + Math.floor(left / 60) + ':' + pad(left % 60) + ' left.';
+}
+function tickUrge() { var el = $('#uclock'); if (el) el.textContent = urgeText(); }
+function planHtml() {
+  var r = (S.reason || '').trim(), ins = (S.instead || '').split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+  if (!r && !ins.length) return '';
+  return '<div class="plan">' + (r ? '<span class="cap" style="opacity:.8">Why you are quitting</span><p class="r">' + esc(r) + '</p>' : '') +
+    (ins.length ? '<p class="cap" style="margin-top:4px">Instead: ' + esc(ins.slice(0, 3).join(' · ')) + '</p>' : '') + '</div>';
+}
 V.pause = function () {
   timers.push(setTimeout(function () { breathLoop(0); }, 120));
-  return '<div class="row" style="justify-content:space-between;align-items:flex-start"><div class="col g8 phead"><h1 class="statement">Just breathe. That is all.</h1></div>' +
+  if (!T.urgeEnd) T.urgeEnd = Date.now() + 600000;
+  clearInterval(T.clk); T.clk = setInterval(tickUrge, 1000); timers.push(T.clk);
+  return '<div class="row" style="justify-content:space-between;align-items:flex-start"><div class="col g8 phead"><h1 class="statement">It will pass.</h1><p class="cap" id="uclock" style="min-height:36px">' + urgeText() + '</p></div>' +
     '<button class="iconbtn" style="color:inherit;margin:-8px -12px 0 0" data-act="sound" aria-label="' + (S.settings.sound ? 'Turn sound off' : 'Turn sound on') + '">' + ic(S.settings.sound ? 'vol' : 'mute') + '</button></div>' +
     '<div class="grow col center" style="justify-content:center;gap:40px"><div class="bwrap">' +
     '<div class="ring" data-k="0"></div><div class="ring" data-k="1"></div><div class="ring" data-k="2"></div><div class="bdisc" id="bdisc"></div>' +
-    '<div class="col center" style="position:absolute;gap:2px;color:var(--haven)"><span id="blabel" style="font-size:22px;line-height:28px;font-weight:600">Get ready</span><span id="bcount" style="font-size:15px;font-weight:500;opacity:.8">&nbsp;</span></div></div>' +
-    '</div>' +
-    '<div class="col g12 pfoot"><button class="btn" data-act="steadier">I feel steadier</button><button class="link" data-act="go" data-v="today">Close this</button></div>';
+    '<div class="col center" style="position:absolute;gap:2px;color:var(--haven)"><span id="blabel">Get ready</span><span id="bcount">&nbsp;</span></div></div>' +
+    '</div>' + planHtml() +
+    '<div class="col g12 pfoot" style="margin-top:16px"><button class="btn" data-act="steadier">The urge has passed</button><button class="link" data-act="go" data-v="today">Close this</button></div>';
 };
 function breathLoop(i) {
   if (view !== 'pause') return;
@@ -415,8 +512,13 @@ function setPhase(p) {
   T.cd = setInterval(function () { left--; var c = $('#bcount'); if (c && left > 0) c.textContent = left; }, 1000); timers.push(T.cd);
   chime(p.n);
 }
+function chipsHtml(ek, cur) {
+  return '<div class="chips mid">' + TRIGS.map(function (t) { return '<button class="chip" data-act="trig" data-ek="' + ek + '" data-t="' + t + '" aria-pressed="' + (cur.indexOf(t) > -1) + '">' + t + '</button>'; }).join('') + '</div>';
+}
 V.passed = function () {
-  return '<div class="grow col center" style="justify-content:center;gap:20px;padding:0 12px"><h1 class="statement">That one passed.</h1><p class="lg" style="max-width:290px">You stayed with it until it moved. That is yours now.</p></div>' +
+  var ev = lastEvent('urge');
+  return '<div class="grow col center" style="justify-content:center;gap:20px;padding:0 12px"><h1 class="statement">You beat that urge.</h1><p class="lg" style="max-width:290px">You stayed with it until it moved. That is yours now.</p>' +
+    '<div class="col g12 center" style="margin-top:8px"><span class="cap">What set it off? Optional.</span>' + chipsHtml('urge', ev ? ev.trig : []) + '</div></div>' +
     '<button class="btn" data-act="go" data-v="today">Back to today</button>';
 };
 
@@ -428,7 +530,7 @@ V.slip = function () {
     '<div class="col g12"><button class="btn" data-act="writeslip">Write what led here</button><button class="btn ghost" data-act="go" data-v="today">Not tonight</button></div>';
 };
 
-var MOODS = [['steady', 'Steady', 'var(--green-tint)', 'var(--green-on-tint)'], ['wobbly', 'A bit wobbly', 'var(--blue-tint)', 'var(--blue-on-tint)'], ['hard', 'Hard', 'var(--clay-tint)', 'var(--clay-on-tint)'], ['slipped', 'I slipped', 'var(--raised)', 'var(--clay)']];
+var MOODS = [['steady', 'Steady', 'var(--green-tint)', 'var(--green-on-tint)'], ['wobbly', 'A bit wobbly', 'var(--blue-tint)', 'var(--blue-on-tint)'], ['hard', 'Hard', 'var(--clay-tint)', 'var(--clay-on-tint)'], ['slipped', 'I watched porn', 'var(--raised)', 'var(--clay)']];
 V.checkin = function () {
   T.mood = T.mood || 'steady';
   return '<div class="col g12"><span class="label" style="color:var(--blue-text)">Close the day</span><h1 class="statement">How did today sit with you?</h1></div>' +
@@ -450,17 +552,17 @@ V.days = function () {
     var cls = (st === 'none' ? '' : st) + (ds === t0 ? ' today' : '');
     cells += '<div class="cell ' + cls + '"' + (st === 'slip' ? ' aria-label="' + d + ', a slip"' : '') + '>' + d + '</div>';
   }
-  var ls = S.slips.length ? S.slips[S.slips.length - 1] : null;
+  var ls = S.slips.length ? S.slips[S.slips.length - 1] : null, ins = insight();
   return '<h1>Days</h1><div class="dgrid">' +
-    '<div class="card greenc da" style="margin-top:20px;padding:24px"><p style="font-size:24px;line-height:30px;font-weight:500">' + motive() + '</p></div>' +
-    '<div class="card col g8 db" style="margin-top:12px;padding:12px 12px 20px"><div class="row" style="justify-content:space-between"><button class="iconbtn" data-act="mo" data-d="-1" aria-label="Previous month">' + ic('left') + '</button><span style="font-size:22px;font-weight:600">' + mi.name + '</span><button class="iconbtn" data-act="mo" data-d="1" aria-label="Next month"' + ((T.mo || 0) >= 0 ? ' disabled' : '') + '>' + ic('right') + '</button></div>' +
+    '<div class="card greenc da col g8" style="margin-top:14px;padding:20px 24px">' + (ins ? '<span class="cap" style="color:inherit;opacity:.85">Your patterns</span>' : '') + '<p style="font-size:' + (ins ? '21px;line-height:28px' : '24px;line-height:30px') + ';font-weight:500">' + (ins || motive()) + '</p></div>' +
+    '<div class="card col g8 db" style="margin-top:8px;padding:12px 12px 20px"><div class="row" style="justify-content:space-between"><button class="iconbtn" data-act="mo" data-d="-1" aria-label="Previous month">' + ic('left') + '</button><span style="font-size:22px;font-weight:600">' + mi.name + '</span><button class="iconbtn" data-act="mo" data-d="1" aria-label="Next month"' + ((T.mo || 0) >= 0 ? ' disabled' : '') + '>' + ic('right') + '</button></div>' +
     '<div class="cal">' + ['M','T','W','T','F','S','S'].map(function (w) { return '<span class="cap" style="color:var(--faint)">' + w + '</span>'; }).join('') + cells + '</div></div>' +
     '<div class="dc" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px">' +
     [['This run', daysOf(dayNum()), 'blue'], ['Longest', daysOf(longest()), 'greenc'], ['Urges passed', String(S.urges.length), 'clayc']].map(function (c) { return '<div class="card ' + (c[2] === 'greenc' ? '' : c[2]) + ' col g4" style="padding:14px 14px;' + (c[2] === 'greenc' ? 'background:var(--green-tint);color:var(--green-on-tint)' : '') + '"><span class="cap" style="color:inherit;opacity:.85">' + c[0] + '</span><span style="font-size:18px;line-height:24px;font-weight:600">' + c[1] + '</span></div>'; }).join('') + '</div>' +
-    (ls ? '<p class="cap dd" style="margin-top:16px;text-align:center">The last slip was ' + fmtDay(ls) + '. It sits in the story. It does not end it.</p>' : '') + '</div>';
+    (ls ? '<p class="cap dd" style="margin-top:16px;text-align:center">You last watched on ' + fmtDay(ls) + '. It sits in the story. It does not end it.</p>' : '') + '</div>';
 };
 
-var PROMPTS = ['What do you wish someone knew right now?', 'What are you really after?', 'Where is the feeling sitting in your body?', 'What would you rather be doing in an hour?', 'Say the thing you would not say out loud.', 'What did today ask of you?'];
+var PROMPTS = ['What were you hoping to feel?', 'What are you really after?', 'Where is the urge sitting in your body?', 'What would you rather be doing in an hour?', 'Who do you want to be tomorrow morning?', 'What did today ask of you?'];
 var TINTS = [['var(--blue-tint)', 'var(--blue-on-tint)'], ['var(--green-tint)', 'var(--green-on-tint)'], ['var(--clay-tint)', 'var(--clay-on-tint)']];
 V.notes = function () {
   var pi = T.pi || 0, prompt = T.slipNote ? 'What was happening before? What did you need?' : PROMPTS[pi % PROMPTS.length];
@@ -470,9 +572,17 @@ V.notes = function () {
   }).join('');
   var alts = T.slipNote ? '' : '<div class="alts col g8"><span class="cap">Other questions</span>' + PROMPTS.map(function (q, i) { return i === pi % PROMPTS.length ? '' : '<button class="altq" data-act="pickq" data-i="' + i + '">' + q + '</button>'; }).join('') + '</div>';
   return '<h1>Say it here</h1><p class="lg" style="margin-top:8px;font-size:16px;line-height:24px">Instead of acting on it. Any words will do, and they stay on this phone.</p>' +
-    '<div class="ngrid"><div class="nq"><div class="card blue col g12" style="margin-top:20px"><p style="font-size:22px;line-height:28px;font-weight:500">' + prompt + '</p>' + (T.slipNote ? '' : '<button class="btn small anotherq" style="align-self:flex-start;background:var(--blue);color:var(--on-blue)" data-act="prompt">Another question</button>') + '</div>' + alts + '</div>' +
+    '<div class="ngrid"><div class="nq"><div class="card blue col g12" style="margin-top:20px"><p style="font-size:22px;line-height:28px;font-weight:500">' + prompt + '</p>' + (T.slipNote ? '<span class="cap" style="color:inherit;opacity:.85">What set it off? Optional.</span>' + chipsHtml('slip', (lastEvent('slip') || { trig: [] }).trig).replace(' mid', '') : '') + (T.slipNote ? '' : '<button class="btn small anotherq" style="align-self:flex-start;background:var(--blue);color:var(--on-blue)" data-act="prompt">Another question</button>') + '</div>' + alts + '</div>' +
     '<div class="nr"><div class="col g12" style="margin-top:12px"><label class="label" for="nt" style="position:absolute;left:-9999px">Your note</label><textarea id="nt" data-bind="nt" placeholder="Start anywhere.">' + esc(T.nt || '') + '</textarea><button class="btn" data-act="savenote">Put it down</button></div>' +
     (list ? '<div class="col g12" style="margin-top:28px">' + list + '</div>' : '') + '</div></div>';
+};
+
+V.plan = function () {
+  return '<h1>My plan</h1>' +
+    '<div class="col g8" style="margin-top:20px"><label class="label" for="pr">Why I am quitting</label><textarea id="pr" data-bind="pr_reason" style="min-height:96px" placeholder="In your own words.">' + esc(T.pr_reason || '') + '</textarea></div>' +
+    '<div class="col g8" style="margin-top:16px"><label class="label" for="pi">What I will do instead</label><textarea id="pi" data-bind="pr_instead" style="min-height:96px" placeholder="One per line. A walk. Call someone. Cold shower.">' + esc(T.pr_instead || '') + '</textarea></div>' +
+    '<div class="col g8" style="margin-top:16px"><label class="label" for="prk">When it is hardest</label><select id="prk" data-bind="pr_risk">' + RISKS.map(function (r) { return '<option value="' + r[0] + '"' + (T.pr_risk === r[0] ? ' selected' : '') + '>' + r[1] + '</option>'; }).join('') + '</select></div>' +
+    '<div class="col g12" style="margin-top:24px"><button class="btn" data-act="saveplan">Save</button><button class="link" data-act="go" data-v="settings">Cancel</button></div>';
 };
 
 function installRow() {
@@ -487,7 +597,8 @@ V.settings = function () {
   var th = S.settings.theme, snd = S.settings.sound;
   function seg(act, cur, items) { return '<div class="seg" role="group">' + items.map(function (i) { return '<button data-act="' + act + '" data-v="' + i[0] + '" aria-pressed="' + (cur === i[0]) + '">' + i[1] + '</button>'; }).join('') + '</div>'; }
   return '<h1>Settings</h1>' +
-    '<div class="group" style="margin-top:20px">' +
+    '<div class="group" style="margin-top:20px"><button class="ri" data-act="openplan"><span>My reason and plan</span><span class="v">Edit</span></button>' +
+    '<button class="ri" data-act="share"><span>Share my day count</span><span class="v">Partner</span></button>' +
     '<div class="ri"><span>Appearance</span>' + seg('theme', th, [['day', 'Day'], ['night', 'Night'], ['auto', 'Auto']]) + '</div>' +
     '<div class="ri"><span>Breathing sounds</span>' + seg('snd', snd ? 'on' : 'off', [['on', 'On'], ['off', 'Off']]) + '</div>' +
     '<button class="ri" data-act="' + (S.settings.pin ? 'rmpin' : 'setpin') + '"><span>Code to open</span><span class="v">' + (S.settings.pin ? 'On, tap to remove' : 'Off') + '</span></button>' +
@@ -495,13 +606,13 @@ V.settings = function () {
     '<div class="group" style="margin-top:16px"><button class="ri" data-act="export"><span>Save a copy</span><span class="v">JSON</span></button>' +
     '<button class="ri" style="color:var(--clay)" data-act="eraseask"><span>Erase everything</span></button></div>' +
     (installRow() ? '<div class="group" style="margin-top:16px">' + installRow() + '</div>' : '') +
-    '<p class="cap" style="margin:20px 8px 0;line-height:20px">Everything lives on this phone and nowhere else. The name on your home screen is just Still. For a reminder, make a repeating one in your phone\'s own Reminders and call it anything plain. The code is a light lock, not encryption.</p>';
+    '<p class="cap" style="margin:20px 8px 0;line-height:20px">Everything stays on this phone. The name and icon just say Still, so nobody who sees them will know what it is. Sharing sends only your day count. For reminders, make a repeating one in your phone\'s Reminders with a plain name. The code is a light lock, not encryption.</p>';
 };
 
 function sheetHtml() {
   if (!T.sheet) return '';
   var body;
-  if (T.sheet === 'slip') body = '<h2>Record a slip?</h2><p class="lg" style="font-size:16px;line-height:24px">Your run starts again from day one. The days before still count, and they stay in your history.</p><button class="btn clay" data-act="slipdo">Record it</button><button class="link" data-act="closesheet">Not now</button>';
+  if (T.sheet === 'slip') body = '<h2>Record that you watched porn?</h2><p class="lg" style="font-size:16px;line-height:24px">Your count starts again from day one. The days before still count, and they stay in your history.</p><button class="btn clay" data-act="slipdo">Record it</button><button class="link" data-act="closesheet">Not now</button>';
   else body = '<h2>Erase everything?</h2><p class="lg" style="font-size:16px;line-height:24px">Your days and notes will be removed from this phone. This cannot be undone.</p><button class="btn clay" data-act="erasedo">Erase</button><button class="link" data-act="closesheet">Keep it</button>';
   return '<div class="sheetbg" data-act="closesheet"><div class="sheet" role="dialog" aria-modal="true">' + body + '</div></div>';
 }
@@ -522,7 +633,26 @@ var A = {
   closesheet: function () { T.sheet = null; render(); },
   slipask: function () { T.sheet = 'slip'; render(); },
   slipdo: function () { recordSlip(); go('slip'); },
-  steadier: function () { S.urges.push({ d: today() }); save(); go('passed'); },
+  steadier: function () { S.urges.push({ d: today() }); S.events.push({ k: 'urge', d: today(), h: new Date().getHours(), trig: [] }); save(); go('passed'); },
+  trig: function (d) {
+    var ev = lastEvent(d.ek); if (!ev) return;
+    var i = ev.trig.indexOf(d.t); if (i > -1) ev.trig.splice(i, 1); else ev.trig.push(d.t);
+    save(); render();
+  },
+  obnext: function () { T.ob = Math.min(3, (T.ob || 0) + 1); render(); var s = $('#screen'); if (s) s.scrollTop = 0; },
+  obback: function () { T.ob = Math.max(0, (T.ob || 0) - 1); render(); },
+  obrisk: function (d) { T.risk = d.v; render(); },
+  obdone: function () {
+    S.reason = (T.why || '').trim(); S.settings.risk = T.risk || 'none'; S.onboarded = true; save();
+    T.ob = 0; T.why = undefined; T.risk = undefined; go('today');
+  },
+  openplan: function () { T.pr_reason = S.reason || ''; T.pr_instead = S.instead || ''; T.pr_risk = S.settings.risk || 'none'; go('plan'); },
+  saveplan: function () { S.reason = (T.pr_reason || '').trim(); S.instead = (T.pr_instead || '').trim(); S.settings.risk = T.pr_risk || 'none'; save(); go('settings'); toast('Saved.'); },
+  share: function () {
+    var msg = 'I am on ' + daysOf(dayNum()) + ' without porn. Check in on me?';
+    if (navigator.share) { navigator.share({ text: msg }).catch(function () {}); return; }
+    try { navigator.clipboard.writeText(msg).then(function () { toast('Copied. Paste it to someone you trust.'); }, function () { toast(msg); }); } catch (e) { toast(msg); }
+  },
   sound: function () { S.settings.sound = !S.settings.sound; save(); if (S.settings.sound) audio(); var b = $('[data-act=sound]'); if (b) { b.innerHTML = ic(S.settings.sound ? 'vol' : 'mute'); b.setAttribute('aria-label', S.settings.sound ? 'Turn sound off' : 'Turn sound on'); } },
   mood: function (d) { T.mood = d.m; render(); },
   savecheckin: function () {
@@ -592,7 +722,7 @@ if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) { window
 
 /* ---------- start ---------- */
 var seen = false; try { seen = sessionStorage.getItem('still.splash') === '1'; } catch (e) {}
-if (seen) { if (S.settings.pin && !isUnlocked()) { T.pinMode = 'lock'; T.pin = ''; view = 'lock'; } else view = 'today'; }
+if (seen) { if (S.settings.pin && !isUnlocked()) { T.pinMode = 'lock'; T.pin = ''; view = 'lock'; } else view = S.onboarded ? 'today' : 'onboard'; }
 render();
 </script>
 </body>
